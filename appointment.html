@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Appointment — Mrspeechie Speech Therapy</title>
+<meta name="description" content="Book a speech therapy appointment at Mrspeechie. Choose a service, pick a time, and get confirmation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="Mr. Speechie" class="brand-logo">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="blog.html">Blog</a>
+      <a href="appointment.html" class="active">Book Appointment</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="appointment.html" class="btn btn-outline">Book a session</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+ 
+<main>
+ 
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Book an appointment</p>
+      <h1>Let's find a time that works</h1>
+      <p class="lede">Fill in the form and we'll confirm your appointment by phone or email within one business day. First-time clients are booked for a 45-minute evaluation.</p>
+    </div>
+  </section>
+ 
+  <section style="padding-top:10px;">
+    <div class="wrap" style="display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:flex-start;">
+ 
+      <div class="card">
+        <h3 style="margin-bottom:22px;">Appointment details</h3>
+        <form id="appointment-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="appt-name">Full name</label>
+              <input type="text" id="appt-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="appt-relation">Booking for</label>
+              <select id="appt-relation" name="relation" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="myself">Myself</option>
+                <option value="child">My child</option>
+                <option value="parent">A parent / family member</option>
+                <option value="other">Someone else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="appt-email">Email</label>
+              <input type="email" id="appt-email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label for="appt-phone">Phone</label>
+              <input type="tel" id="appt-phone" name="phone" placeholder="+91 00000 00000" required>
+            </div>
+            <div class="field full">
+              <label for="appt-service">Service</label>
+              <select id="appt-service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option>Initial evaluation (new client)</option>
+                <option>Articulation therapy</option>
+                <option>Language delay</option>
+                <option>Stuttering &amp; fluency</option>
+                <option>Voice therapy</option>
+                <option>Aphasia &amp; stroke recovery</option>
+                <option>Social communication</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="appt-date">Preferred date</label>
+              <input type="date" id="appt-date" name="date" required>
+            </div>
+            <div class="field">
+              <label for="appt-time">Preferred time</label>
+              <select id="appt-time" name="time" required>
+                <option value="" disabled selected>Select a time</option>
+                <option>9:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+                <option>5:00 PM</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="appt-format">Session format</label>
+              <select id="appt-format" name="format" required>
+                <option value="" disabled selected>Select one</option>
+                <option>In-clinic — Thrissur</option>
+                <option>Online video session</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="appt-notes">Anything we should know? (optional)</label>
+              <textarea id="appt-notes" name="notes" placeholder="Brief context about the concern, prior therapy, or scheduling constraints"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-clay btn-block">Request appointment</button>
+          <p class="form-note">This sends a request only — nothing is booked until we confirm availability with you.</p>
+        </form>
+ 
+        <div class="confirm-box" id="appt-confirm">
+          <div class="dot">✓</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Request received</h3>
+            <p style="margin-bottom:4px;" id="appt-summary"></p>
+            <p style="margin-bottom:0;">We'll call or email to confirm this slot within one business day.</p>
+          </div>
+        </div>
+      </div>
+ 
+      <aside>
+        <div class="card" style="margin-bottom:24px;">
+          <h3>What to expect first visit</h3>
+          <ul class="info-list">
+            <li><span class="k">Bring</span><span class="v">Any prior evaluation reports or referral notes, if you have them.</span></li>
+            <li><span class="k">Arrive</span><span class="v">10 minutes early to complete a short intake form.</span></li>
+            <li><span class="k">Duration</span><span class="v">45 minutes for the evaluation, plus discussion of next steps.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Office hours</h3>
+          <ul class="info-list">
+            <li><span class="k">Mon–Fri</span><span class="v">9:00 AM – 6:00 PM</span></li>
+            <li><span class="k">Saturday</span><span class="v">9:00 AM – 2:00 PM</span></li>
+            <li><span class="k">Sunday</span><span class="v">Closed</span></li>
+          </ul>
+        </div>
+      </aside>
+ 
+    </div>
+  </section>
+ 
+</main>
+ 
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:10px;">
+          <img src="assets/logo.png" alt="Mr. Speechie" class="brand-logo brand-logo-footer">
+        </a>
+        <p style="font-size:0.92rem; max-width:32ch;">Speech, language, and voice therapy for children and adults.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="appointment.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Articulation</a></li>
+          <li><a href="services.html">Language delay</a></li>
+          <li><a href="services.html">Stuttering &amp; fluency</a></li>
+          <li><a href="services.html">Voice therapy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+914872200000">+91 487 220 0000</a></li>
+          <li><a href="mailto:hello@mrspeechie.example">hello@mrspeechie.example</a></li>
+          <li><a href="contact.html">Thrissur, Kerala</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mrspeechie Speech Therapy. All rights reserved.</span>
+      <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
+    </div>
+  </div>
+</footer>
+ 
+<script src="script.js"></script>
+</body>
+</html>
