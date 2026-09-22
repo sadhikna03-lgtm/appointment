@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book an Appointment — Mrspeechie Speech Therapy</title>
-<meta name="description" content="Book a speech therapy appointment at Mrspeechie. Choose a service, pick a time, and get confirmation.">
+<title>Resource Admin — Mrspeechie Speech Therapy</title>
+<meta name="description" content="Internal tool for generating resource card code for the Parent and Professional resource pages.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
+
 <header class="site-header">
   <nav class="nav">
     <a href="index.html" class="brand">
@@ -25,11 +26,11 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
-      <a href="resources.html">Resources</a>
+      <a href="resources.html" class="active">Resources</a>
       <a href="index.html#videos">Videos</a>
       <a href="index.html#community">Community</a>
       <a href="contact.html">Contact</a>
-      <a href="appointment.html" class="nav-book active">Book an Appointment</a>
+      <a href="appointment.html" class="nav-book">Book an Appointment</a>
     </div>
     <div class="nav-cta">
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -38,114 +39,99 @@
     </div>
   </nav>
 </header>
- 
+
 <main>
- 
+
   <section class="page-hero">
     <div class="wrap">
-      <p class="eyebrow">Book an Appointment</p>
-      <h1>Let's Take the Next Step</h1>
-      <p class="lede">Share a few details about your concerns. We'll get in touch to understand your needs and discuss the appropriate next steps for online or offline support.</p>
+      <p class="eyebrow">Admin Tool</p>
+      <h1>Resource Card Generator</h1>
+      <p class="lede">A helper tool for adding new items to the Parent and Professional resource pages. This does not upload files or store anything online — see "How this actually works" below.</p>
     </div>
   </section>
- 
+
   <section style="padding-top:10px;">
-    <div class="wrap" style="display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:flex-start;">
- 
-      <div class="card">
-        <h3 style="margin-bottom:22px;">Appointment details</h3>
-        <form id="appointment-form" novalidate>
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="wrap">
+         
+      <div id="admin-lock" class="card" style="max-width:420px; margin:0 auto;">
+        <h3 style="margin-bottom:16px;">Enter passcode</h3>
+        <div class="field">
+          <label for="admin-passcode">Passcode</label>
+          <input type="password" id="admin-passcode" placeholder="Passcode">
+        </div>
+        <button type="button" id="admin-unlock-btn" class="btn btn-clay btn-block" style="margin-top:14px;">Unlock</button>
+        <p class="form-note" id="admin-passcode-error" style="display:none; color:var(--clay-deep);">Incorrect passcode.</p>
+      </div>
+
+      <div id="admin-panel" style="display:none;">
+
+        <div class="error-box show" style="margin-bottom:32px;">
+          <div>
+            <strong>Read this first.</strong> This page only generates a snippet of HTML code for a new resource card — it does not upload your PDF/PPT file anywhere, and nothing you enter here is saved or published automatically. You still need to (1) upload the actual file to your hosting yourself, and (2) paste the generated code into the right page's HTML file yourself. Full steps are below the generator.
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:32px;">
+          <h3 style="margin-bottom:22px;">New resource details</h3>
           <div class="form-grid">
-            <div class="field">
-              <label for="appt-child-first">Child's first name</label>
-              <input type="text" id="appt-child-first" name="childFirstName" placeholder="First name" required>
+            <div class="field full">
+              <label for="gen-title">Resource title</label>
+              <input type="text" id="gen-title" placeholder="e.g. First Words Checklist">
             </div>
             <div class="field">
-              <label for="appt-child-last">Child's last name</label>
-              <input type="text" id="appt-child-last" name="childLastName" placeholder="Last name" required>
-            </div>
-            <div class="field">
-              <label for="appt-gender">Gender</label>
-              <select id="appt-gender" name="gender" required>
-                <option value="" disabled selected>Select one</option>
-                <option>Male</option>
-                <option>Female</option>
+              <label for="gen-audience">Audience</label>
+              <select id="gen-audience">
+                <option value="parents">Parents &amp; Caregivers</option>
+                <option value="professionals">Professionals</option>
               </select>
             </div>
             <div class="field">
-              <label for="appt-age">Age</label>
-              <input type="number" id="appt-age" name="age" min="0" max="120" placeholder="Age" required>
-            </div>
-            <div class="field">
-              <label for="appt-contact-name">Contact person name</label>
-              <input type="text" id="appt-contact-name" name="contactName" placeholder="Your name" required>
-            </div>
-            <div class="field">
-              <label for="appt-relationship">Relationship to child</label>
-              <select id="appt-relationship" name="relationship" required>
-                <option value="" disabled selected>Select one</option>
-                <option>Father</option>
-                <option>Mother</option>
-                <option>Other</option>
+              <label for="gen-filetype">File type</label>
+              <select id="gen-filetype">
+                <option value="pdf">PDF</option>
+                <option value="ppt">PPT</option>
               </select>
-            </div>
-            <div class="field">
-              <label for="appt-email">Email</label>
-              <input type="email" id="appt-email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="field">
-              <label for="appt-mobile">Mobile</label>
-              <input type="tel" id="appt-mobile" name="mobile" placeholder="+91 00000 00000" required>
             </div>
             <div class="field full">
-              <label for="appt-concerns">Concerns</label>
-              <textarea id="appt-concerns" name="concerns" placeholder="Tell us a bit about the concern you'd like support with" required></textarea>
+              <label for="gen-desc">Short description</label>
+              <textarea id="gen-desc" placeholder="One or two sentences describing this resource"></textarea>
+            </div>
+            <div class="field full">
+              <label for="gen-filename">File name (as uploaded to your hosting)</label>
+              <input type="text" id="gen-filename" placeholder="e.g. first-words-checklist.pdf">
             </div>
           </div>
-          <button type="submit" class="btn btn-clay btn-block">Submit</button>
-          <p class="form-note">This sends a request only — nothing is booked until we confirm availability with you.</p>
-        </form>
-
-        <div class="error-box" id="appt-error">
-          <div>
-            <strong>Something went wrong.</strong> Please try again, or reach out directly via WhatsApp or email.
-          </div>
+          <button type="button" id="gen-btn" class="btn btn-clay btn-block">Generate Code</button>
         </div>
 
-        <div class="confirm-box" id="appt-confirm">
-          <div class="dot">✓</div>
-          <div>
-            <h3 style="margin-bottom:6px;">Request received</h3>
-            <p style="margin-bottom:0;" id="appt-summary">We'll get in touch to confirm the appropriate next steps.</p>
-          </div>
+        <div class="card" id="gen-output-card" style="display:none; margin-bottom:32px;">
+          <h3 style="margin-bottom:10px;">Generated code</h3>
+          <p style="font-size:0.9rem; margin-bottom:16px;">Copy this and paste it into the resource page's HTML file, in the grid marked with an HTML comment (see instructions below).</p>
+          <textarea id="gen-output" readonly style="width:100%; min-height:160px; font-family:'IBM Plex Mono', monospace; font-size:0.82rem; padding:16px; border-radius:12px; border:1px solid var(--line); background:var(--cloud-dim);"></textarea>
+          <button type="button" id="gen-copy-btn" class="btn btn-outline btn-block" style="margin-top:14px;">Copy to Clipboard</button>
+          <p class="form-note" id="gen-copied-note" style="display:none;">Copied.</p>
         </div>
-      </div>
- 
-      <aside>
-        <div class="card" style="margin-bottom:24px;">
-          <h3>What to expect first visit</h3>
-          <ul class="info-list">
-            <li><span class="k">Bring</span><span class="v">Any prior evaluation reports or referral notes, if you have them.</span></li>
-            <li><span class="k">Arrive</span><span class="v">10 minutes early to complete a short intake form.</span></li>
-            <li><span class="k">Duration</span><span class="v">45 minutes for the evaluation, plus discussion of next steps.</span></li>
-          </ul>
-        </div>
+
         <div class="card">
-          <h3>Office hours</h3>
-          <ul class="info-list">
-            <li><span class="k">Mon–Fri</span><span class="v">9:00 AM – 6:00 PM</span></li>
-            <li><span class="k">Saturday</span><span class="v">9:00 AM – 2:00 PM</span></li>
-            <li><span class="k">Sunday</span><span class="v">Closed</span></li>
-          </ul>
+          <h3 style="margin-bottom:16px;">How this actually works</h3>
+          <p style="font-size:0.94rem;">This site is static HTML with no server or database, so there's no way for a form like this to truly "publish" a file for visitors automatically. Here's the real process, step by step:</p>
+          <ol style="padding-left:20px; font-size:0.94rem; color:var(--ink-soft); display:flex; flex-direction:column; gap:10px;">
+            <li>Upload the actual PDF or PPT file to your hosting, inside <code>assets/resources/parents/</code> or <code>assets/resources/professionals/</code> (create these folders the first time).</li>
+            <li>Fill in the form above and click <strong>Generate Code</strong>.</li>
+            <li>Copy the generated snippet.</li>
+            <li>Open <code>resources-parents.html</code> or <code>resources-professionals.html</code> in a text editor, find the <code>&lt;!-- Resource cards go here --&gt;</code> comment inside the downloads grid, and paste the snippet just above it.</li>
+            <li>Remove the <code>style="display:none;"</code> from that grid's opening tag (and delete or hide the "coming soon" message above it) once at least one real resource is listed.</li>
+            <li>Save the file and re-upload it to your hosting.</li>
+          </ol>
         </div>
-      </aside>
- 
+
+      </div>
+
     </div>
   </section>
- 
+
 </main>
- 
+
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -210,7 +196,7 @@
     </div>
   </div>
 </footer>
- 
+
 <script src="script.js"></script>
 </body>
 </html>
