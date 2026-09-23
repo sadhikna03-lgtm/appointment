@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // IMPORTANT: replace the placeholder URL below with your own deployed Web App URL
   // (see the deployment instructions provided separately). Until that's done, this
   // form cannot actually deliver submissions anywhere.
-  const APPOINTMENT_WEBAPP_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  const APPOINTMENT_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzWptWzHC4dIu87JB5PtTbapV5eNHIrnGdY0ueR0GLymxEbnBQOwe75k2y99SBReyv7/exec';
 
   const apptForm = document.getElementById('appointment-form');
   if (apptForm) {
